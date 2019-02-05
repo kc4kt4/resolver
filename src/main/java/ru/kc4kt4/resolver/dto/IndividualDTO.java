@@ -1,9 +1,9 @@
 package ru.kc4kt4.resolver.dto;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import ru.kc4kt4.resolver.util.Constants;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -15,21 +15,13 @@ import javax.validation.constraints.Pattern;
 @Valid
 public class IndividualDTO extends ApplicationDTO {
 
-    @ApiModelProperty(value = "Name",
-            required = true,
-            example = "Anna")
     @NotBlank
     private String name;
 
-    @ApiModelProperty(value = "Surname",
-            required = true,
-            example = "Bergen")
     @NotBlank
     private String surname;
 
-    @ApiModelProperty(value = "Patronymic",
-            example = "+79998881111")
-    @Pattern(regexp = "^\\+[0-9]{11}$")
+    @Pattern(regexp = Constants.PHONE)
     @NotBlank
     private String phone;
 }

@@ -1,7 +1,6 @@
 package ru.kc4kt4.resolver.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -13,11 +12,10 @@ import ru.kc4kt4.resolver.enums.ApplicationStatus;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorResponse extends AbstractResponse {
 
-    @ApiModelProperty(value = "Описание ошибки")
     private String message;
 
     public ErrorResponse(String message) {
-        super.setStatus(ApplicationStatus.REJECTED);
+        super.setStatus(ApplicationStatus.NOT_READY_OR_REJECTED);
         this.message = message;
     }
 }

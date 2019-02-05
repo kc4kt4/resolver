@@ -1,7 +1,5 @@
 package ru.kc4kt4.resolver.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,8 +15,7 @@ import ru.kc4kt4.resolver.response.SuccessfulResponse;
 import javax.validation.Valid;
 
 @RestController
-@Api("Api: application")
-@RequestMapping("/application")
+@RequestMapping(value = "/application")
 public class ApplicationController {
 
     @Autowired
@@ -26,7 +23,6 @@ public class ApplicationController {
     @Autowired
     private GiveApplicationByIdHandler giveApplicationByIdHandler;
 
-    @ApiOperation(value = "Принять заявку на обработку")
     @RequestMapping(value = "/",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
@@ -35,7 +31,6 @@ public class ApplicationController {
         return acceptApplicationHandler.handleRequest(request);
     }
 
-    @ApiOperation(value = "Получить заявку по id")
     @RequestMapping(value = "/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

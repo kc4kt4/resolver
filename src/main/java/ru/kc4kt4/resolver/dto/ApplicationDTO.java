@@ -2,8 +2,9 @@ package ru.kc4kt4.resolver.dto;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.io.Serializable;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -13,8 +14,7 @@ import lombok.Data;
         @JsonSubTypes.Type(value = CompanyDTO.class, name = "company")
 })
 @Data
-public class ApplicationDTO {
+public class ApplicationDTO implements Serializable {
 
-    @ApiModelProperty("id заявки")
     private Long id;
 }

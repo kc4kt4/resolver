@@ -20,7 +20,6 @@ import ru.kc4kt4.resolver.configuration.properties.HikariProperties;
 import javax.sql.DataSource;
 
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableConfigurationProperties
