@@ -1,0 +1,52 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.2.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+
+group = 'ru.kc4kt4'
+version = '1.0'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    springFoxArtifacts = ["springfox-swagger2", "springfox-swagger-ui"]
+
+    springFoxVersion = "2.9.2"
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.data:spring-data-jpa'
+    implementation('org.springframework.boot:spring-boot-starter-validation')
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'org.postgresql:postgresql'
+    implementation 'com.zaxxer:HikariCP:2.7.6'
+    implementation 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final'
+    implementation 'org.hibernate:hibernate-core:5.2.17.Final'
+    implementation 'org.hibernate:hibernate-validator:6.0.13.Final'
+    compileOnly 'org.projectlombok:lombok'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'io.swagger:swagger-annotations:1.5.21'
+    springFoxArtifacts.each {
+        artifact -> compile("io.springfox:$artifact:$springFoxVersion")
+    }
+}

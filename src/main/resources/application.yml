@@ -1,0 +1,22 @@
+db:
+  host: 192.168.99.100
+  port: 5432
+  user: admin
+  password: password
+  schema: public
+  database: postgres
+  ddlAuto: validate
+  showSql: true
+hikari:
+  minPoolSize: 5
+  maxPoolSize: 20
+  preferredTestQuery: select 1
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+server:
+  port: 8080
