@@ -2,6 +2,7 @@ package ru.kc4kt4.resolver.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.kc4kt4.resolver.dto.ApplicationDTO;
 import ru.kc4kt4.resolver.enums.ApplicationStatus;

@@ -9,7 +9,7 @@ import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import ru.kc4kt4.resolver.service.RabbitMQService;
+import ru.kc4kt4.resolver.service.RabbitMQHandleMessageService;
 import ru.kc4kt4.resolver.util.Constants;
 
 @Configuration
@@ -44,7 +44,7 @@ public class AppConfiguration {
     }
 
     @Bean
-    public MessageListenerAdapter listenerAdapter(RabbitMQService receiver) {
+    public MessageListenerAdapter listenerAdapter(RabbitMQHandleMessageService receiver) {
         return new MessageListenerAdapter(receiver, HANDLE_MESSAGE_METHOD_NAME);
     }
 }

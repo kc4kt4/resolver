@@ -1,0 +1,6 @@
+version: '3.4'
+services:
+  rabbitmq:
+    environment:
+      RABBITMQ_DEFAULT_USER: "kc4kt4.test"
+      RABBITMQ_DEFAULT_PASS: "qwerty"

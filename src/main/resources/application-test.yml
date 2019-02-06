@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+  rabbitmq:
+    host: 192.168.99.100
+    username: kc4kt4.test
+    password: qwerty
