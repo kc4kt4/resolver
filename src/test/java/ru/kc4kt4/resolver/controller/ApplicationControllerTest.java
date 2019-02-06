@@ -15,6 +15,7 @@ import ru.kc4kt4.resolver.AbstractTest;
 import ru.kc4kt4.resolver.dto.ApplicationDTO;
 import ru.kc4kt4.resolver.dto.CompanyDTO;
 import ru.kc4kt4.resolver.dto.IndividualDTO;
+import ru.kc4kt4.resolver.entity.Application;
 import ru.kc4kt4.resolver.entity.Company;
 import ru.kc4kt4.resolver.entity.Individual;
 import ru.kc4kt4.resolver.enums.ApplicationStatus;
@@ -22,6 +23,8 @@ import ru.kc4kt4.resolver.enums.ApplicationType;
 import ru.kc4kt4.resolver.repository.ApplicationRepository;
 import ru.kc4kt4.resolver.request.AcceptApplicationRequest;
 import ru.kc4kt4.resolver.response.SuccessfulResponse;
+
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -33,11 +36,13 @@ import static org.junit.Assert.assertTrue;
 
 public class ApplicationControllerTest extends AbstractTest {
 
-    private final static String URL = "/application/";
+    private final static String URL = "/application";
     private static final String NAME = "Peter";
     private static final String SURNAME = "Jackson";
     private static final String COMPANY = "VTB";
     private static final String PHONE = "+79990000001";
+    private static final String ID = "1";
+    private static final String BAD_ID = "123";
 
     @LocalServerPort
     protected int port;
@@ -84,12 +89,54 @@ public class ApplicationControllerTest extends AbstractTest {
 
     }
 
+    @Test
+    @DependsOn("acceptCompanyApplicationTest")
+    public void getApplicationByIdTest() {
+        String url = createURLWithPort(URL + "/" + ID);
+        ResponseEntity<SuccessfulResponse> response = restTemplate.exchange(url,
+                                                                            HttpMethod.GET,
+                                                                            createHttpEntity(),
+                                                                            SuccessfulResponse.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(ApplicationStatus.APPROVED, response.getBody().getStatus());
+
+        Optional<Application> app = applicationRepository.findById(Long.valueOf(ID));
+        assertTrue(app.isPresent());
+        assertTrue(app.get() instanceof Company);
+        Company application = (Company) app.get();
+
+        assertTrue(response.getBody().getApplication() instanceof CompanyDTO);
+        CompanyDTO dto = (CompanyDTO) response.getBody().getApplication();
+
+        assertEquals(application.getApplicationId(), dto.getId());
+        assertEquals(application.getCompanyName(), dto.getCompanyName());
+        assertEquals(application.getDirectorName(), dto.getDirectorName());
+        assertEquals(application.getDirectorSurname(), dto.getDirectorSurname());
+    }
+
+    @Test
+    public void getApplicationByIdTestWithBadId() {
+        String url = createURLWithPort(URL + "/" + BAD_ID);
+        ResponseEntity<SuccessfulResponse> response = restTemplate.exchange(url,
+                                                                            HttpMethod.GET,
+                                                                            createHttpEntity(),
+                                                                            SuccessfulResponse.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(ApplicationStatus.NOT_READY_OR_REJECTED, response.getBody().getStatus());
+    }
+
     private String createURLWithPort(String url) {
         return "http://localhost:" + port + url;
     }
 
     private HttpEntity createHttpEntity(ApplicationDTO dto) {
         return new HttpEntity<>(createAcceptApplicationRequest(dto), createSimpleHeaders());
+    }
+
+    private HttpEntity createHttpEntity() {
+        return new HttpEntity<>(null, createSimpleHeaders());
     }
 
     private AcceptApplicationRequest createAcceptApplicationRequest(ApplicationDTO dto) {

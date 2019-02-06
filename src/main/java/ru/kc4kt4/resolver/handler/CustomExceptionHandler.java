@@ -30,7 +30,7 @@ public class CustomExceptionHandler {
         return new ErrorResponse(errorMessage);
     }
 
-    @ExceptionHandler(MapperServiceException.class)
+    @ExceptionHandler({MapperServiceException.class, ProcessApplicationException.class})
     @ResponseBody
     public ErrorResponse handleMapperServiceException(MapperServiceException e,
                                          HttpServletResponse httpResponse) {
@@ -46,16 +46,6 @@ public class CustomExceptionHandler {
                                          HttpServletResponse httpResponse) {
         log.error(e.getMessage(), e);
         httpResponse.setStatus(HttpStatus.NOT_FOUND.value());
-        String errorMessage = e.getMessage() == null ? MISSING_MESSAGE : e.getMessage();
-        return new ErrorResponse(errorMessage);
-    }
-
-    @ExceptionHandler(ProcessApplicationException.class)
-    @ResponseBody
-    public ErrorResponse handleProcessApplicationException(ProcessApplicationException e,
-                                         HttpServletResponse httpResponse) {
-        log.error(e.getMessage(), e);
-        httpResponse.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
         String errorMessage = e.getMessage() == null ? MISSING_MESSAGE : e.getMessage();
         return new ErrorResponse(errorMessage);
     }

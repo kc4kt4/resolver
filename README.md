@@ -1,12 +1,7 @@
 Фронт  приложение. Основанно на Java spring boot gradle(версия 4.10)
 Используемая БД - PostgreSQL
 
-### 1 Собрать прилодение 
-```sh
-    gradle clean bootWar
-```
-
-### 2 настройка приложения 
+### 1 настройка приложения 
 Настройки соединения с базой данных:    
 ```sh
     раздел настройки соединения с базой данных
@@ -30,6 +25,11 @@
       username: kc4kt4
       password: qwerty
   ```
+
+### 2 собрать прилодение 
+```sh
+    gradle clean bootWar
+```
   
 ### 3 запуск приложения
 Выполнить команду
@@ -60,6 +60,27 @@
 
    ```sh
       docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
-      gradlew clean bootRun
+      gradlew clean bootRun -Dspring.profiles.active=dev (or smth other profile name)
    ```
-     
+### 6 примеры валидных запросов:
+Примеры валидных запросов:
+   ```sh
+{
+	"application": {
+		"type": "COMPANY",
+		"directorName": "Stefan",
+		"directorSurname": "Gallager",
+		"companyName": "SBPT"
+	}
+}
+
+{
+	"application": {
+		"type": "INDIVIDUAL",
+		"name": "Stefan",
+		"surname": "Gallager",
+		"phone": "+79990001122"
+	}
+}
+   ```
+    

@@ -25,8 +25,7 @@ public class ApplicationController {
     @Autowired
     private GiveApplicationByIdHandler giveApplicationByIdHandler;
 
-    @RequestMapping(value = "/",
-            method = RequestMethod.POST,
+    @RequestMapping(method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SuccessfulResponse> acceptApplication(@RequestBody @Valid AcceptApplicationRequest request) {
