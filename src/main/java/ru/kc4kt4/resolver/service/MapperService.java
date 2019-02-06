@@ -20,31 +20,28 @@ public class MapperService {
         switch (applicationType) {
             case COMPANY:
                 CompanyDTO companyDTO = (CompanyDTO) dto;
-                log.debug(String.format("LOG_MAPPER: Получена заявка от компании - %s", companyDTO.getCompanyName()));
+                log.debug("Receiver application from company - {}", dto);
                 return convertToEntity(companyDTO);
             case INDIVIDUAL:
                 IndividualDTO individualDTO = (IndividualDTO) dto;
-                log.debug(String.format("LOG_MAPPER: Получена заявка физического лица с номером телефона - %s",
-                                        individualDTO.getPhone()));
+                log.debug("Receiver application from individual - {}", dto);
                 return convertToEntity(individualDTO);
             default:
-                throw new MapperServiceException("Ошибка маппинга dto");
+                throw new MapperServiceException("Mapping to dto error");
         }
     }
 
     public ApplicationDTO convertToDTO(Application application) {
         if (application instanceof Company) {
-            log.debug(String.format("LOG_MAPPER: Заявка с id %s относится к заявках от компаний",
-                                    application.getApplicationId()));
             Company company = (Company) application;
+            log.debug("Application {} instance of Company", application);
             return convertToDTO(company);
         } else if (application instanceof Individual) {
-            log.debug(String.format("LOG_MAPPER: Заявка с id %s относится к заявках от физических лиц",
-                                    application.getApplicationId()));
             Individual individual = (Individual) application;
+            log.debug("Application {} instance of Individual", application);
             return convertToDTO(individual);
         } else {
-            throw new MapperServiceException("Ошибка маппинга entity");
+            throw new MapperServiceException("Mapping to entity error");
         }
     }
 
@@ -103,6 +100,6 @@ public class MapperService {
     }
 
     private String createErrorMessage(Object o) {
-        return String.format("LOG_MAPPER: Ошибка при попытке конвертации %s", o.toString());
+        return String.format("Mapping error with object - %s", o);
     }
 }

@@ -1,32 +1,25 @@
-package ru.kc4kt4.resolver.configuration;
+package ru.kc4kt4.resolver;
 
 import org.flywaydb.core.Flyway;
 import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
 import javax.sql.DataSource;
 
-/**
- * @author vasilevsky.ii on 06.02.2019
- */
 @Configuration
 @Profile("test")
-public class TestConfiguration {
+public class FlywayConfigurationTest {
 
     @Bean("dataSourceTest")
-    public DataSource dataSource() {
+    @Primary
+    public javax.sql.DataSource dataSource() {
         return DataSourceBuilder
                 .create()
                 .build();
-    }
-
-    @Bean
-    public TestRestTemplate testRestTemplate() {
-        return new TestRestTemplate();
     }
 
     @Bean(initMethod = "migrate")

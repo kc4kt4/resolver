@@ -1,7 +1,7 @@
 package ru.kc4kt4.resolver.handler;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kc4kt4.resolver.dto.ApplicationDTO;
 import ru.kc4kt4.resolver.entity.Application;
@@ -13,22 +13,16 @@ import ru.kc4kt4.resolver.service.MapperService;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class GiveApplicationByIdHandler {
 
     private final ApplicationRepository applicationRepository;
     private final MapperService mapperService;
 
-    @Autowired
-    public GiveApplicationByIdHandler(ApplicationRepository applicationRepository,
-                                      MapperService mapperService) {
-        this.applicationRepository = applicationRepository;
-        this.mapperService = mapperService;
-    }
-
     public SuccessfulResponse handlerRequest(Long id) {
         Application application = applicationRepository.findById(id)
                 .orElseThrow(() -> new ApplicationNotFoundException(String.format("Заявка с id %s не найдена", id)));
-        log.debug(String.format("Заявка с id %s найдена", id));
+        log.debug("Application with id {} not found", id);
 
         ApplicationDTO dto = mapperService.convertToDTO(application);
 

@@ -21,7 +21,6 @@ import ru.kc4kt4.resolver.entity.Individual;
 import ru.kc4kt4.resolver.enums.ApplicationStatus;
 import ru.kc4kt4.resolver.enums.ApplicationType;
 import ru.kc4kt4.resolver.repository.ApplicationRepository;
-import ru.kc4kt4.resolver.request.AcceptApplicationRequest;
 import ru.kc4kt4.resolver.response.SuccessfulResponse;
 
 import java.util.Optional;
@@ -52,7 +51,6 @@ public class ApplicationControllerTest extends AbstractTest {
     @Autowired
     private ApplicationRepository applicationRepository;
 
-
     @Test
     public void acceptCompanyApplicationTest() throws Exception {
         String url = createURLWithPort(URL);
@@ -64,13 +62,13 @@ public class ApplicationControllerTest extends AbstractTest {
         assertNotNull(response.getBody());
         assertEquals(ApplicationStatus.ACCEPTED, response.getBody().getStatus());
         assertEquals(0, applicationRepository.findAll().size());
-        Thread.sleep(1000);
+        while (applicationRepository.findAll().size() == 0) {}
         assertEquals(1, applicationRepository.findAll().size());
         assertTrue(applicationRepository.findById(1L).isPresent());
         assertTrue(applicationRepository.findById(1L).get() instanceof Company);
     }
 
-    @Test
+    @Test(timeout = 2000)
     @DependsOn("acceptCompanyApplicationTest")
     public void acceptIndividualApplicationTest() throws Exception {
         String url = createURLWithPort(URL);
@@ -82,11 +80,10 @@ public class ApplicationControllerTest extends AbstractTest {
         assertNotNull(response.getBody());
         assertEquals(ApplicationStatus.ACCEPTED, response.getBody().getStatus());
         assertEquals(1, applicationRepository.findAll().size());
-        Thread.sleep(1000);
+        while (applicationRepository.findAll().size() == 1) {}
         assertEquals(2, applicationRepository.findAll().size());
         assertTrue(applicationRepository.findById(2L).isPresent());
         assertTrue(applicationRepository.findById(2L).get() instanceof Individual);
-
     }
 
     @Test
@@ -132,17 +129,11 @@ public class ApplicationControllerTest extends AbstractTest {
     }
 
     private HttpEntity createHttpEntity(ApplicationDTO dto) {
-        return new HttpEntity<>(createAcceptApplicationRequest(dto), createSimpleHeaders());
+        return new HttpEntity<>(dto, createSimpleHeaders());
     }
 
     private HttpEntity createHttpEntity() {
         return new HttpEntity<>(null, createSimpleHeaders());
-    }
-
-    private AcceptApplicationRequest createAcceptApplicationRequest(ApplicationDTO dto) {
-        AcceptApplicationRequest request = new AcceptApplicationRequest();
-        request.setApplication(dto);
-        return request;
     }
 
     private ApplicationDTO createCompanyDTO() {

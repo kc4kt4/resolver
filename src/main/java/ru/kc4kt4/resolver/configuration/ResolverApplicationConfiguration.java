@@ -1,4 +1,4 @@
-package ru.kc4kt4.resolver.configuration.properties;
+package ru.kc4kt4.resolver.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;

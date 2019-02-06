@@ -1,27 +1,33 @@
-### 1 настройка приложения 
-Настройки соединения с базой данных:    
+### 1 описание сервиса
+Написать небольшой сервис, который принимает заявки на обработку, выполняет их асинхронно и возвращает полученный результат.
+Первая точка входа в сервис - это контроллер, который принимает извне заявку на обработку.
+Заявки бывают разных типов, отличающихся набором полей, и должны быть с использованием наследования.
+HTTP адрес для приема заявок один для всех типов.
+При поступлении заявки возвращается положительный ответ о ее приеме, не дожидаясь обработки этой заявки.
+Сама обработка происходит асинхронно.
+Данный механизм реализован с использованием очереди в RabbitMQ.
+В качестве метода, осуществляющего обработку заявки, для простоты используется метод:
 ```sh
-    раздел настройки соединения с базой данных
-      host: 192.168.99.100
-      port: 5432
-      user: admin
-      password: password
-      schema: public
-      database: postgres
-      ddlAuto: validate
-      showSql: true
-    hikari:
-      minPoolSize: 5
-      maxPoolSize: 20
-      preferredTestQuery: select 1
-  ```
-Настройки соединения с rabbitMQ:    
-```sh
-    rabbitmq:
-      host: 192.168.99.100
-      username: kc4kt4
-      password: qwerty
-  ```
+    public Request process(Request request) throws Exception { 
+        Thread.sleep(1000);
+        return request;
+    }
+```
+Считаем, что структура запроса и результата всегда совпадает.
+Далее результат выполнения сохраняется в базу данных.
+Вторая точка входа в сервис - это метод получения результатов заявки по id, если она обработана, или информации о том, что результат по заявке не готов.
+В случае готовности контролер должен вернуть сохраненный ранее объект.
+
+Стэк используемых технологий:
+    
+    spring-web;
+    spring-amqp;
+    flywaydb;
+    postgresql;
+    hibernate;
+    lombok;
+    spring-boot-starter-tomcat;
+    embedded-database-postgres for testing;
 
 ### 2 собрать прилодение 
 ```sh
@@ -59,7 +65,13 @@
       docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
       gradlew clean bootRun -Dspring.profiles.active=dev (or smth other profile name)
    ```
-### 6 примеры валидных запросов:
+### 6 запуск приложение через docker
+
+   ```sh
+      docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+      gradlew clean bootRun -Dspring.profiles.active=dev (or smth other profile name)
+   ```
+### 7 примеры валидных запросов:
 Примеры валидных запросов:
    ```sh
 {

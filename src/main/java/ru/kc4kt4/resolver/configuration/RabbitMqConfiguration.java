@@ -13,7 +13,7 @@ import ru.kc4kt4.resolver.service.RabbitMQHandleMessageService;
 import ru.kc4kt4.resolver.util.Constants;
 
 @Configuration
-public class AppConfiguration {
+public class RabbitMqConfiguration {
 
     private static final String HANDLE_MESSAGE_METHOD_NAME = "receiveMessage";
     private static final String ROUTING_KEY = "resolver.#";

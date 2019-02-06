@@ -1,27 +1,28 @@
-db:
-  host: 192.168.99.100
-  port: 5432
-  user: admin
-  password: password
-  schema: public
-  database: postgres
-  ddlAuto: validate
-  showSql: true
-hikari:
-  minPoolSize: 5
-  maxPoolSize: 20
-  preferredTestQuery: select 1
-
 spring:
   jpa:
     properties:
       hibernate:
         temp:
           use_jdbc_metadata_defaults: false
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    database: postgresql
+
   rabbitmq:
     host: 192.168.99.100
     username: kc4kt4
     password: qwerty
 
-server:
-  port: 8080
+  datasource:
+    url: jdbc:postgresql://192.168.99.100:5432/postgres
+    driver-class-name: org.postgresql.Driver
+    platform: postgres
+    username: admin
+    password: password
+    hikari:
+      maximum-pool-size: 20
+
+logging:
+  level:
+    ru.kc4kt4: debug
