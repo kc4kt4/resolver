@@ -51,15 +51,15 @@
 ### 4 запуск тестов     
 При запуске тестов выполнить последовательно команды из корневой директории проекта
     
-    ```sh
+   ```sh
       docker-compose -f docker-compose.yml -f docker-compose.test.yml up
       gradlew test
-    ``` 
+   ```
 ### 5 запуск приложение через gradle     
 При запуске тестов выполнить последовательно команды из корневой директории проекта
 
-    ```sh
+   ```sh
       docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
       gradlew test
-    ```    
+   ```
      
