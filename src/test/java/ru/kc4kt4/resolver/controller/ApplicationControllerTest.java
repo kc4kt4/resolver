@@ -18,6 +18,7 @@ import ru.kc4kt4.resolver.dto.IndividualDTO;
 import ru.kc4kt4.resolver.entity.Company;
 import ru.kc4kt4.resolver.entity.Individual;
 import ru.kc4kt4.resolver.enums.ApplicationStatus;
+import ru.kc4kt4.resolver.enums.ApplicationType;
 import ru.kc4kt4.resolver.repository.ApplicationRepository;
 import ru.kc4kt4.resolver.request.AcceptApplicationRequest;
 import ru.kc4kt4.resolver.response.SuccessfulResponse;
@@ -102,6 +103,7 @@ public class ApplicationControllerTest extends AbstractTest {
         dto.setDirectorName(NAME);
         dto.setDirectorSurname(SURNAME);
         dto.setCompanyName(COMPANY);
+        dto.setType(ApplicationType.COMPANY.name());
         return dto;
     }
 
@@ -110,6 +112,7 @@ public class ApplicationControllerTest extends AbstractTest {
         dto.setName(NAME);
         dto.setSurname(SURNAME);
         dto.setPhone(PHONE);
+        dto.setType(ApplicationType.INDIVIDUAL.name());
         return dto;
     }
 

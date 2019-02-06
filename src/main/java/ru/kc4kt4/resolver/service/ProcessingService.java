@@ -19,11 +19,11 @@ public class ProcessingService {
         this.mapperService = mapperService;
     }
 
-    public ApplicationDTO process(ApplicationDTO application) throws Exception {
-        log.debug(String.format("LOG_PROCESSING_SERVICE: Обработка заявки %s", application.toString()));
+    public ApplicationDTO process(ApplicationDTO message) throws Exception {
+        log.debug(String.format("LOG_PROCESSING_SERVICE: Обработка заявки %s", message.toString()));
         Thread.sleep(1000);
-        log.debug(String.format("LOG_PROCESSING_SERVICE: Заявка успешно обработана %s", application.toString()));
-        return application;
+        log.debug(String.format("LOG_PROCESSING_SERVICE: Заявка успешно обработана %s", message.toString()));
+        return message;
     }
 
     public Application saveApplication(ApplicationDTO processedMessage) {

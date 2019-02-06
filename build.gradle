@@ -23,6 +23,10 @@ repositories {
     mavenCentral()
 }
 
+bootRun {
+    systemProperties = System.properties
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.data:spring-data-jpa'
@@ -43,5 +47,4 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation('io.zonky.test:embedded-database-spring-test:1.3.4')
-
 }

@@ -8,13 +8,15 @@ import java.io.Serializable;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
-        property = "type")
+        property = "type",
+        visible = true)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = IndividualDTO.class, name = "individual"),
-        @JsonSubTypes.Type(value = CompanyDTO.class, name = "company")
+        @JsonSubTypes.Type(value = IndividualDTO.class, name = "INDIVIDUAL"),
+        @JsonSubTypes.Type(value = CompanyDTO.class, name = "COMPANY")
 })
 @Data
 public class ApplicationDTO implements Serializable {
 
     private Long id;
+    private String type;
 }

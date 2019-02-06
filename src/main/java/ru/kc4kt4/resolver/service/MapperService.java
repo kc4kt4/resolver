@@ -8,6 +8,7 @@ import ru.kc4kt4.resolver.dto.IndividualDTO;
 import ru.kc4kt4.resolver.entity.Application;
 import ru.kc4kt4.resolver.entity.Company;
 import ru.kc4kt4.resolver.entity.Individual;
+import ru.kc4kt4.resolver.enums.ApplicationType;
 import ru.kc4kt4.resolver.exception.MapperServiceException;
 
 @Service
@@ -15,34 +16,36 @@ import ru.kc4kt4.resolver.exception.MapperServiceException;
 public class MapperService {
 
     public Application convertToEntity(ApplicationDTO dto) {
-        Application application;
-        if (dto instanceof CompanyDTO) {
-            CompanyDTO companyDTO = (CompanyDTO) dto;
-            log.debug(String.format("LOG_MAPPER: Получена заявка от компании - %s", companyDTO.getCompanyName()));
-            application = convertToEntity(companyDTO);
-        } else {
-            IndividualDTO individualDTO = (IndividualDTO) dto;
-            log.debug(String.format("LOG_MAPPER: Получена заявка физического лица с номером телефона - %s",
-                                    individualDTO.getPhone()));
-            application = convertToEntity(individualDTO);
+        ApplicationType applicationType = ApplicationType.valueOf(dto.getType());
+        switch (applicationType) {
+            case COMPANY:
+                CompanyDTO companyDTO = (CompanyDTO) dto;
+                log.debug(String.format("LOG_MAPPER: Получена заявка от компании - %s", companyDTO.getCompanyName()));
+                return convertToEntity(companyDTO);
+            case INDIVIDUAL:
+                IndividualDTO individualDTO = (IndividualDTO) dto;
+                log.debug(String.format("LOG_MAPPER: Получена заявка физического лица с номером телефона - %s",
+                                        individualDTO.getPhone()));
+                return convertToEntity(individualDTO);
+            default:
+                throw new MapperServiceException("Ошибка маппинга dto");
         }
-        return application;
     }
 
     public ApplicationDTO convertToDTO(Application application) {
-        ApplicationDTO dto;
         if (application instanceof Company) {
             log.debug(String.format("LOG_MAPPER: Заявка с id %s относится к заявках от компаний",
                                     application.getApplicationId()));
             Company company = (Company) application;
-            dto = convertToDTO(company);
-        } else {
+            return convertToDTO(company);
+        } else if (application instanceof Individual) {
             log.debug(String.format("LOG_MAPPER: Заявка с id %s относится к заявках от физических лиц",
                                     application.getApplicationId()));
             Individual individual = (Individual) application;
-            dto = convertToDTO(individual);
+            return convertToDTO(individual);
+        } else {
+            throw new MapperServiceException("Ошибка маппинга entity");
         }
-        return dto;
     }
 
     private Application convertToEntity(CompanyDTO dto) {
