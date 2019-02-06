@@ -68,8 +68,7 @@ HTTP адрес для приема заявок один для всех тип
 ### 6 запуск приложение через docker
 
    ```sh
-      docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
-      gradlew clean bootRun -Dspring.profiles.active=dev (or smth other profile name)
+      upd next time
    ```
 ### 7 примеры валидных запросов:
 Примеры валидных запросов:
