@@ -1,4 +1,4 @@
-### 1 описание сервиса
+### описание сервиса
 Cервис, который принимает заявки на обработку, выполняет их асинхронно и возвращает полученный результат.
 Первая точка входа в сервис - это контроллер, который принимает извне заявку на обработку.
 Заявки бывают разных типов, отличающихся набором полей, и должны быть с использованием наследования.
@@ -30,15 +30,15 @@ HTTP адрес для приема заявок один для всех тип
     EmbeddedPostgreSQL for testing
     testContainers for up RabbitMQ in test
 
-### 2 собрать приложение 
+### собрать приложение 
 
     gradle clean bootWar
   
-### 3 запуск тестов     
+### запуск тестов     
     
     gradlew test
 
-### 4 запуск приложения
+### запуск приложения
 Выполнить команду
 
     docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
@@ -51,12 +51,12 @@ HTTP адрес для приема заявок один для всех тип
 <br> -Dspring.profiles.active=profile_name<br>
 файл с настройками должен полностью повторять струкутру переопределенного
    
-### 5 запуск приложение через gradle     
+### запуск приложение через gradle     
 
     docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
     gradlew clean bootRun -Dspring.profiles.active=dev (or smth other profile name)
 
-### 6 запуск приложение через docker
+### запуск приложение через docker
 Собрать образ
     
      docker build -f Dockerfile -t resolver .
@@ -65,7 +65,7 @@ HTTP адрес для приема заявок один для всех тип
      
      docker-compose -f docker-compose.yml -f docker-compose.docker.yml up
         
-### 7 примеры валидных запросов:
+### примеры валидных запросов:
 Примеры валидных запросов:
 
     curl -d '{"type":"COMPANY", "directorName":"Frank", "directorSurname":"Gallager", "companyName":"SBPT"}' -H "Content-Type: application/json" -X POST http://localhost:8080/application
