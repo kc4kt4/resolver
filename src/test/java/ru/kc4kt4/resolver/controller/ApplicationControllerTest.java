@@ -21,6 +21,7 @@ import ru.kc4kt4.resolver.entity.Individual;
 import ru.kc4kt4.resolver.enums.ApplicationStatus;
 import ru.kc4kt4.resolver.enums.ApplicationType;
 import ru.kc4kt4.resolver.repository.ApplicationRepository;
+import ru.kc4kt4.resolver.response.ErrorResponse;
 import ru.kc4kt4.resolver.response.SuccessfulResponse;
 
 import java.util.Optional;
@@ -115,10 +116,10 @@ public class ApplicationControllerTest extends AbstractTest {
     @Test
     public void getApplicationByIdTestWithBadId() {
         String url = createURLWithPort(URL + "/" + BAD_ID);
-        ResponseEntity<SuccessfulResponse> response = restTemplate.exchange(url,
+        ResponseEntity<ErrorResponse> response = restTemplate.exchange(url,
                                                                             HttpMethod.GET,
                                                                             createHttpEntity(),
-                                                                            SuccessfulResponse.class);
+                                                                            ErrorResponse.class);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(ApplicationStatus.NOT_READY_OR_REJECTED, response.getBody().getStatus());
