@@ -1,0 +1,19 @@
+version: '3.4'
+services:
+  db:
+    image: postgres
+    ports:
+    - "5432:5432"
+    environment:
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "password"
+
+  rabbitmq:
+    environment:
+      RABBITMQ_DEFAULT_USER: "kc4kt4"
+      RABBITMQ_DEFAULT_PASS: "qwerty"
+
+  resolver:
+    image: resolver
+    ports:
+      - "8080:8080"
