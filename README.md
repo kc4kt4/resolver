@@ -19,9 +19,10 @@ HTTP адрес для приема заявок один для всех тип
 
 Основной стек технологий:
     
-    Spring Boot
+    Jsvs 8
+    Spring Boot 2
     Spring AMQP
-    PostgreSQL
+    PostgreSQL 11
     Flyway
     Hibernate
     
