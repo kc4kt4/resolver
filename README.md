@@ -27,7 +27,8 @@ HTTP адрес для приема заявок один для всех тип
     Hibernate
     
     JUnit
-    testContainers for up RabbitMQ & Postgres in test
+    testContainers - RabbitMQ for testing
+    embeddedPostgres for testing
 
 ### собрать приложение 
 
@@ -50,14 +51,11 @@ HTTP адрес для приема заявок один для всех тип
 <br> -Dspring.profiles.active=profile_name<br>
 файл с настройками должен полностью повторять струкутру переопределенного
    
-### запуск приложение через gradle     
-
-    docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
-    gradlew clean bootRun -Dspring.profiles.active=dev (or smth other profile name)
-
+Приложение по дефолту поднимается на 8888 порт
 ### запуск приложение через docker
 Собрать образ
-    
+     
+     gradle clean bootWar
      docker build -f Dockerfile -t resolver .
      
 Запустить
