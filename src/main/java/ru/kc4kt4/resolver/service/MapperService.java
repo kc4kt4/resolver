@@ -41,7 +41,8 @@ public class MapperService {
             log.debug("Application {} instance of Individual", application);
             return convertToDTO(individual);
         } else {
-            throw new MapperServiceException("Mapping to entity error");
+            log.error("Application cast exception", application);
+            throw new MapperServiceException("Mapping entity error");
         }
     }
 
@@ -53,7 +54,7 @@ public class MapperService {
             company.setCompanyName(dto.getCompanyName());
             return company;
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("Company dto to entity convert exception", e);
             throw new MapperServiceException(createErrorMessage(dto));
         }
     }
@@ -66,7 +67,7 @@ public class MapperService {
         individual.setPhone(dto.getPhone());
         return individual;
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("Individual dto to entity convert exception", e);
             throw new MapperServiceException(createErrorMessage(dto));
         }
     }
@@ -80,7 +81,7 @@ public class MapperService {
         dto.setId(entity.getApplicationId());
         return dto;
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("Individual entity to dto convert exception", e);
             throw new MapperServiceException(createErrorMessage(entity));
         }
     }
@@ -94,7 +95,7 @@ public class MapperService {
             dto.setId(entity.getApplicationId());
             return dto;
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("Company entity to dto convert exception", e);
             throw new MapperServiceException(createErrorMessage(entity));
         }
     }

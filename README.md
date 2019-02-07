@@ -19,7 +19,7 @@ HTTP адрес для приема заявок один для всех тип
 
 Основной стек технологий:
     
-    Jsvs 8
+    Java 8
     Spring Boot 2
     Spring AMQP
     PostgreSQL 11
@@ -27,8 +27,7 @@ HTTP адрес для приема заявок один для всех тип
     Hibernate
     
     JUnit
-    EmbeddedPostgreSQL for testing
-    testContainers for up RabbitMQ in test
+    testContainers for up RabbitMQ & Postgres in test
 
 ### собрать приложение 
 

@@ -23,7 +23,7 @@ public class RabbitMQHandleMessageService {
         try {
             processedMessage = processingService.process(message);
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("Processing application exception", e);
             throw new ProcessApplicationException("Error with process application");
         }
         Application application = processingService.saveApplication(processedMessage);
