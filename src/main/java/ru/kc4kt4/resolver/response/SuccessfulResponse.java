@@ -10,5 +10,4 @@ import ru.kc4kt4.resolver.enums.ApplicationStatus;
 public class SuccessfulResponse {
 
     private ApplicationDTO application;
-    private ApplicationStatus status;
 }

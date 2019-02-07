@@ -27,7 +27,6 @@ public class GiveApplicationByIdHandler {
         ApplicationDTO dto = mapperService.convertToDTO(application);
 
         SuccessfulResponse response = new SuccessfulResponse();
-        response.setStatus(ApplicationStatus.APPROVED);
         response.setApplication(dto);
         return response;
     }

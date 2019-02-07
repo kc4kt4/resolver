@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.kc4kt4.resolver.dto.ApplicationDTO;
+import ru.kc4kt4.resolver.enums.ApplicationStatus;
 import ru.kc4kt4.resolver.handler.AcceptApplicationHandler;
 import ru.kc4kt4.resolver.handler.GiveApplicationByIdHandler;
 import ru.kc4kt4.resolver.response.SuccessfulResponse;
@@ -27,9 +28,9 @@ public class ApplicationController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<SuccessfulResponse> acceptApplication(@RequestBody @Valid ApplicationDTO dto) {
-        SuccessfulResponse response = acceptApplicationHandler.handleRequest(dto);
-        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+    public ResponseEntity<ApplicationStatus> acceptApplication(@RequestBody @Valid ApplicationDTO dto) {
+        ApplicationStatus status = acceptApplicationHandler.handleRequest(dto);
+        return new ResponseEntity<>(status, HttpStatus.ACCEPTED);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
