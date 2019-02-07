@@ -68,7 +68,18 @@ HTTP адрес для приема заявок один для всех тип
 ### примеры валидных запросов:
 Примеры валидных запросов:
 
-    curl -d '{"type":"COMPANY", "directorName":"Frank", "directorSurname":"Gallager", "companyName":"SBPT"}' -H "Content-Type: application/json" -X POST http://localhost:8080/application
-    curl -d '{"type":"INDIVIDUAL", "name":"Frank", "surname":"Gallager", "phone":"+79990001122"}' -H "Content-Type: application/json" -X POST http://localhost:8080/application
-    curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/application/1
+    curl
+    -d '{"type":"COMPANY", "directorName":"Frank", "directorSurname":"Gallager", "companyName":"SBPT"}'
+    -H "Content-Type: application/json"
+    -X POST http://localhost:8080/application
+
+    curl
+    -d '{"type":"INDIVIDUAL", "name":"Frank", "surname":"Gallager", "phone":"+79990001122"}'
+    -H "Content-Type: application/json"
+    -X POST http://localhost:8080/application
+    
+    curl -i
+    -H "Accept: application/json"
+    -H "Content-Type: application/json"
+    -X GET http://localhost:8080/application/1
  
