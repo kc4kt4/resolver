@@ -18,16 +18,17 @@ HTTP адрес для приема заявок один для всех тип
 Вторая точка входа в сервис - это метод получения результатов заявки по id, если она обработана, или информации о том, что результат по заявке не готов.
 В случае готовности контролер должен вернуть сохраненный ранее объект.
 
-Стэк используемых технологий:
+Основной стек технологий:
     
-    spring-web;
-    spring-amqp;
-    flywaydb;
-    postgresql;
-    hibernate;
-    lombok;
-    spring-boot-starter-tomcat;
-    embedded-database-postgres for testing;
+    Spring Boot
+    Spring AMQP
+    PostgreSQL
+    Flyway
+    Hibernate
+    
+    JUnit
+    EmbeddedPostgreSQL for testing
+    testContainers for up RabbitMQ in test
 
 ### 2 собрать приложение 
 
