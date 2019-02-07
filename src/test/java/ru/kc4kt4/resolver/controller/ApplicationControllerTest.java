@@ -55,13 +55,13 @@ public class ApplicationControllerTest extends AbstractTest {
     @Test
     public void acceptCompanyApplicationTest() throws Exception {
         String url = createURLWithPort(URL);
-        ResponseEntity<SuccessfulResponse> response = restTemplate.exchange(url,
+        ResponseEntity<ApplicationStatus> response = restTemplate.exchange(url,
                                                                             HttpMethod.POST,
                                                                             createHttpEntity(createCompanyDTO()),
-                                                                            SuccessfulResponse.class);
+                                                                            ApplicationStatus.class);
         assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertEquals(ApplicationStatus.ACCEPTED, response.getBody().getStatus());
+        assertEquals(ApplicationStatus.ACCEPTED, response.getBody());
         assertEquals(0, applicationRepository.findAll().size());
         while (applicationRepository.findAll().size() == 0) {}
         assertEquals(1, applicationRepository.findAll().size());
@@ -73,13 +73,13 @@ public class ApplicationControllerTest extends AbstractTest {
     @DependsOn("acceptCompanyApplicationTest")
     public void acceptIndividualApplicationTest() throws Exception {
         String url = createURLWithPort(URL);
-        ResponseEntity<SuccessfulResponse> response = restTemplate.exchange(url,
+        ResponseEntity<ApplicationStatus> response = restTemplate.exchange(url,
                                                                             HttpMethod.POST,
                                                                             createHttpEntity(createIndividualDTO()),
-                                                                            SuccessfulResponse.class);
+                                                                            ApplicationStatus.class);
         assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertEquals(ApplicationStatus.ACCEPTED, response.getBody().getStatus());
+        assertEquals(ApplicationStatus.ACCEPTED, response.getBody());
         assertEquals(1, applicationRepository.findAll().size());
         while (applicationRepository.findAll().size() == 1) {}
         assertEquals(2, applicationRepository.findAll().size());
@@ -97,7 +97,6 @@ public class ApplicationControllerTest extends AbstractTest {
                                                                             SuccessfulResponse.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertEquals(ApplicationStatus.APPROVED, response.getBody().getStatus());
 
         Optional<Application> app = applicationRepository.findById(Long.valueOf(ID));
         assertTrue(app.isPresent());

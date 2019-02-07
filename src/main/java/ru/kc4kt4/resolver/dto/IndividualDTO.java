@@ -12,7 +12,6 @@ import javax.validation.constraints.Pattern;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Data
-@Valid
 public class IndividualDTO extends ApplicationDTO {
 
     @NotBlank
