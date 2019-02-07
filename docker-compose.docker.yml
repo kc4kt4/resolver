@@ -16,4 +16,9 @@ services:
   resolver:
     image: resolver
     ports:
-      - "8080:8080"
+      - "8888:8888"
+    environment:
+      - "JAVA_OPTS=-Dspring.profiles.active=dev
+      -Dspring.datasource.url=jdbc:postgresql://resolver_db_1:5432/postgres
+      -Dspring.rabbitmq.host=resolver_rabbitmq_1
+      -Dserver.port=8888"

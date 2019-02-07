@@ -26,3 +26,6 @@ spring:
 logging:
   level:
     ru.kc4kt4: debug
+
+server:
+  port: 8888
