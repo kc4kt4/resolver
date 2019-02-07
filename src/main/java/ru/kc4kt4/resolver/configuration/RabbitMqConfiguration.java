@@ -1,5 +1,6 @@
 package ru.kc4kt4.resolver.configuration;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
@@ -12,7 +13,11 @@ import org.springframework.context.annotation.Configuration;
 import ru.kc4kt4.resolver.service.RabbitMQHandleMessageService;
 import ru.kc4kt4.resolver.util.Constants;
 
+/**
+ * The type Rabbit mq configuration.
+ */
 @Configuration
+@RequiredArgsConstructor
 public class RabbitMqConfiguration {
 
     private static final String HANDLE_MESSAGE_METHOD_NAME = "receiveMessage";
