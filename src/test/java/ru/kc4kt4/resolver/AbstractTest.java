@@ -4,6 +4,7 @@ import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.junit.ClassRule;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.testcontainers.containers.GenericContainer;
@@ -18,6 +19,7 @@ import java.util.Arrays;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureEmbeddedDatabase
 @ActiveProfiles("test")
+@DirtiesContext
 public abstract class AbstractTest {
 
     @ClassRule
