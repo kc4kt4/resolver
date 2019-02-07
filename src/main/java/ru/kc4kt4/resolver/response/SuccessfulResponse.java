@@ -3,8 +3,10 @@ package ru.kc4kt4.resolver.response;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import ru.kc4kt4.resolver.dto.ApplicationDTO;
-import ru.kc4kt4.resolver.enums.ApplicationStatus;
 
+/**
+ * The type Successful response.
+ */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SuccessfulResponse {

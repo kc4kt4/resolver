@@ -8,6 +8,9 @@ import ru.kc4kt4.resolver.enums.ApplicationStatus;
 import ru.kc4kt4.resolver.exception.InternalServerError;
 import ru.kc4kt4.resolver.service.RabbitMQService;
 
+/**
+ * The type Accept application handler.
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -15,6 +18,12 @@ public class AcceptApplicationHandler {
 
     private final RabbitMQService rabbitMQService;
 
+    /**
+     * Handle request application status.
+     *
+     * @param dto the dto
+     * @return the application status
+     */
     public ApplicationStatus handleRequest(ApplicationDTO dto) {
         try {
             rabbitMQService.sendMessage(dto);

@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+/**
+ * The type Company.
+ */
 @Entity
 @Table(name = "company")
 @Data

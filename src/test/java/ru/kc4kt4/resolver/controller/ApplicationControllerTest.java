@@ -31,9 +31,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * @author vasilevsky.ii on 06.02.2019
+ * The type Application controller test.
  */
-
 public class ApplicationControllerTest extends AbstractTest {
 
     private final static String URL = "/application";
@@ -44,6 +43,9 @@ public class ApplicationControllerTest extends AbstractTest {
     private static final String ID = "1";
     private static final String BAD_ID = "123";
 
+    /**
+     * The Port.
+     */
     @LocalServerPort
     protected int port;
 
@@ -52,6 +54,11 @@ public class ApplicationControllerTest extends AbstractTest {
     @Autowired
     private ApplicationRepository applicationRepository;
 
+    /**
+     * Accept company application test.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void acceptCompanyApplicationTest() throws Exception {
         String url = createURLWithPort(URL);
@@ -69,6 +76,11 @@ public class ApplicationControllerTest extends AbstractTest {
         assertTrue(applicationRepository.findById(1L).get() instanceof Company);
     }
 
+    /**
+     * Accept individual application test.
+     *
+     * @throws Exception the exception
+     */
     @Test(timeout = 2000)
     @DependsOn("acceptCompanyApplicationTest")
     public void acceptIndividualApplicationTest() throws Exception {
@@ -87,6 +99,9 @@ public class ApplicationControllerTest extends AbstractTest {
         assertTrue(applicationRepository.findById(2L).get() instanceof Individual);
     }
 
+    /**
+     * Gets application by id test.
+     */
     @Test
     @DependsOn("acceptCompanyApplicationTest")
     public void getApplicationByIdTest() {
@@ -112,6 +127,9 @@ public class ApplicationControllerTest extends AbstractTest {
         assertEquals(application.getDirectorSurname(), dto.getDirectorSurname());
     }
 
+    /**
+     * Gets application by id test with bad id.
+     */
     @Test
     public void getApplicationByIdTestWithBadId() {
         String url = createURLWithPort(URL + "/" + BAD_ID);

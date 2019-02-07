@@ -6,6 +6,9 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * The type Company dto.
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)

@@ -10,10 +10,18 @@ import org.springframework.context.annotation.Profile;
 
 import javax.sql.DataSource;
 
+/**
+ * The type Flyway configuration test.
+ */
 @Configuration
 @Profile("test")
 public class FlywayConfigurationTest {
 
+    /**
+     * Data source javax . sql . data source.
+     *
+     * @return the javax . sql . data source
+     */
     @Bean("dataSourceTest")
     @Primary
     public javax.sql.DataSource dataSource() {
@@ -22,6 +30,12 @@ public class FlywayConfigurationTest {
                 .build();
     }
 
+    /**
+     * Flyway flyway.
+     *
+     * @param dataSource the data source
+     * @return the flyway
+     */
     @Bean(initMethod = "migrate")
     @DependsOn("dataSourceTest")
     public Flyway flyway(DataSource dataSource) {

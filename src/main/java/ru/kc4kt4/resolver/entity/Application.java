@@ -13,6 +13,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
+/**
+ * The type Application.
+ */
 @Entity
 @Table(name = "application")
 @Data

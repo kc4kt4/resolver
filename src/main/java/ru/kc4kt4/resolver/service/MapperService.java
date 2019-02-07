@@ -11,10 +11,19 @@ import ru.kc4kt4.resolver.entity.Individual;
 import ru.kc4kt4.resolver.enums.ApplicationType;
 import ru.kc4kt4.resolver.exception.MapperServiceException;
 
+/**
+ * The type Mapper service.
+ */
 @Service
 @Slf4j
 public class MapperService {
 
+    /**
+     * Convert to entity application.
+     *
+     * @param dto the dto
+     * @return the application
+     */
     public Application convertToEntity(ApplicationDTO dto) {
         ApplicationType applicationType = ApplicationType.valueOf(dto.getType());
         switch (applicationType) {
@@ -31,6 +40,12 @@ public class MapperService {
         }
     }
 
+    /**
+     * Convert to dto application dto.
+     *
+     * @param application the application
+     * @return the application dto
+     */
     public ApplicationDTO convertToDTO(Application application) {
         if (application instanceof Company) {
             Company company = (Company) application;

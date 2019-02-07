@@ -8,6 +8,8 @@ import ru.kc4kt4.resolver.entity.Application;
 import ru.kc4kt4.resolver.exception.ProcessApplicationException;
 
 /**
+ * The type Rabbit mq handle message service.
+ *
  * @author vasilevsky.ii on 06.02.2019
  */
 @Service
@@ -17,6 +19,11 @@ public class RabbitMQHandleMessageService {
 
     private final ProcessingService processingService;
 
+    /**
+     * Receive message.
+     *
+     * @param message the message
+     */
     public void receiveMessage(ApplicationDTO message) {
         log.debug("Message {} is receive, start processing");
         ApplicationDTO processedMessage;

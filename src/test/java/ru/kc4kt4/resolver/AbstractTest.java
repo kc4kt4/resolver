@@ -12,9 +12,8 @@ import org.testcontainers.containers.GenericContainer;
 import java.util.Arrays;
 
 /**
- * @author vasilevsky.ii on 06.02.2019
+ * The type Abstract test.
  */
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureEmbeddedDatabase
@@ -22,6 +21,11 @@ import java.util.Arrays;
 @DirtiesContext
 public abstract class AbstractTest {
 
+    /**
+     * Rabbit mq generic container.
+     *
+     * @return the generic container
+     */
     @ClassRule
     public static GenericContainer rabbitMq() {
         GenericContainer genericContainer = new GenericContainer("rabbitmq:management");

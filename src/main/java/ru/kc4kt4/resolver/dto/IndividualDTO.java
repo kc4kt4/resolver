@@ -5,10 +5,12 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import ru.kc4kt4.resolver.util.Constants;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+/**
+ * The type Individual dto.
+ */
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Data

@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+/**
+ * The type Individual.
+ */
 @Entity
 @Table(name = "individual")
 @Data

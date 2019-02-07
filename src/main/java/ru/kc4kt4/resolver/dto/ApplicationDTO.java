@@ -7,6 +7,9 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * The type Application dto.
+ */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         property = "type",

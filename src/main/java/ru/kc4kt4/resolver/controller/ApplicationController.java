@@ -18,6 +18,9 @@ import ru.kc4kt4.resolver.response.SuccessfulResponse;
 
 import javax.validation.Valid;
 
+/**
+ * The type Application controller.
+ */
 @RestController
 @RequestMapping(value = "/application")
 @RequiredArgsConstructor
@@ -26,6 +29,12 @@ public class ApplicationController {
     private final AcceptApplicationHandler acceptApplicationHandler;
     private final GiveApplicationByIdHandler giveApplicationByIdHandler;
 
+    /**
+     * Accept application response entity.
+     *
+     * @param dto the dto
+     * @return the response entity
+     */
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<ApplicationStatus> acceptApplication(@RequestBody @Valid ApplicationDTO dto) {
@@ -33,6 +42,12 @@ public class ApplicationController {
         return new ResponseEntity<>(status, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Give application by id successful response.
+     *
+     * @param id the id
+     * @return the successful response
+     */
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public SuccessfulResponse giveApplicationById(@PathVariable(value = "id") Long id) {
         return giveApplicationByIdHandler.handlerRequest(id);

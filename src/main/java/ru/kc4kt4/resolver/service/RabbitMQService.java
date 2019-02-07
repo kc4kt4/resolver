@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import ru.kc4kt4.resolver.dto.ApplicationDTO;
 import ru.kc4kt4.resolver.util.Constants;
 
+/**
+ * The type Rabbit mq service.
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -14,6 +17,11 @@ public class RabbitMQService {
 
     private final RabbitTemplate rabbitTemplate;
 
+    /**
+     * Send message.
+     *
+     * @param application the application
+     */
     public void sendMessage(ApplicationDTO application) {
         log.debug("Sending message in RabbitMQ");
         rabbitTemplate.convertAndSend(Constants.TOPIC_EXCHANGE_NAME, "resolver", application);
