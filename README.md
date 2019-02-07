@@ -45,16 +45,13 @@ HTTP адрес для приема заявок один для всех тип
 
 Запуск приложения выполнять из директории build/libs
 
-    java -jar resolver-1.0.war
+    java -Dspring.profiles.active=dev -jar resolver-1.0.war
 
 Для переопределения файла со свойсвами при старте указать параметр 
 <br> -Dspring.profiles.active=profile_name<br>
 файл с настройками должен полностью повторять струкутру переопределенного
    
-    java -Dspring.profiles.active=profile_name -jar resolver-1.0.war
-   
 ### 5 запуск приложение через gradle     
-При запуске тестов выполнить последовательно команды из корневой директории проекта
 
     docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
     gradlew clean bootRun -Dspring.profiles.active=dev (or smth other profile name)
