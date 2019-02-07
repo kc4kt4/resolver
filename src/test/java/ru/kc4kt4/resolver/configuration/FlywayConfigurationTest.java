@@ -1,4 +1,4 @@
-package ru.kc4kt4.resolver;
+package ru.kc4kt4.resolver.configuration;
 
 import org.flywaydb.core.Flyway;
 import org.springframework.boot.jdbc.DataSourceBuilder;
