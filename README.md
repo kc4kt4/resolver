@@ -85,7 +85,7 @@ HTTP адрес для приема заявок один для всех тип
     -H "Content-Type: application/json"
     -X POST http://localhost:8888/application
     
-    curl -i
+    curl
     -H "Accept: application/json"
     -X GET http://localhost:8888/application/1
     
