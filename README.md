@@ -55,8 +55,10 @@ HTTP адрес для приема заявок один для всех тип
     
 Так же желательно указать следующие значения
     
-    -Dspring.datasource.url=jdbc:postgresql://localhost:5432/postgres
-    -Dspring.rabbitmq.host=localhost
+    default value your_host=192.168.99.100
+    
+    -Dspring.datasource.url=jdbc:postgresql://your_data_base_host:5432/postgres
+    -Dspring.rabbitmq.host=your_rabbitmq_host
     -Dserver.port=port"
     
 файл с настройками должен полностью повторять струкутру переопределенного
@@ -79,16 +81,16 @@ HTTP адрес для приема заявок один для всех тип
     curl
     -d '{"type":"COMPANY", "directorName":"Frank", "directorSurname":"Gallager", "companyName":"SBPT"}'
     -H "Content-Type: application/json"
-    -X POST http://192.168.99.100:8888/application
+    -X POST http://your_host:8888/application
 
     curl
     -d '{"type":"INDIVIDUAL", "name":"Frank", "surname":"Gallager", "phone":"+79990001122"}'
     -H "Content-Type: application/json"
-    -X POST http://192.168.99.100:8888/application
+    -X POST http://your_host:8888/application
     
     curl
     -H "Accept: application/json"
-    -X GET http://192.168.99.100:8888/application/1
+    -X GET http://your_host:8888/application/1
     
-    curl -H -X GET http://192.168.99.100:8888/actuator/health //статус сервиса
+    curl -H -X GET http://your_host:8888/actuator/health //статус сервиса
  
