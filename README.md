@@ -79,16 +79,16 @@ HTTP адрес для приема заявок один для всех тип
     curl
     -d '{"type":"COMPANY", "directorName":"Frank", "directorSurname":"Gallager", "companyName":"SBPT"}'
     -H "Content-Type: application/json"
-    -X POST http://localhost:8888/application
+    -X POST http://192.168.99.100:8888/application
 
     curl
     -d '{"type":"INDIVIDUAL", "name":"Frank", "surname":"Gallager", "phone":"+79990001122"}'
     -H "Content-Type: application/json"
-    -X POST http://localhost:8888/application
+    -X POST http://192.168.99.100:8888/application
     
     curl
     -H "Accept: application/json"
-    -X GET http://localhost:8888/application/1
+    -X GET http://192.168.99.100:8888/application/1
     
     curl -H -X GET http://192.168.99.100:8888/actuator/health //статус сервиса
  
