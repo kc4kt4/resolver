@@ -48,7 +48,15 @@ HTTP адрес для приема заявок один для всех тип
     java -Dspring.profiles.active=dev -jar resolver-1.0.war
 
 Для переопределения файла со свойсвами при старте указать параметр 
-<br> -Dspring.profiles.active=profile_name<br>
+    
+    -Dspring.profiles.active=profile_name
+    
+Так же желательно указать следующие значения
+    
+    -Dspring.datasource.url=jdbc:postgresql://localhost:5432/postgres
+    -Dspring.rabbitmq.host=localhost
+    -Dserver.port=port"
+    
 файл с настройками должен полностью повторять струкутру переопределенного
    
 Приложение по дефолту поднимается на 8888 порт
@@ -68,15 +76,16 @@ HTTP адрес для приема заявок один для всех тип
     curl
     -d '{"type":"COMPANY", "directorName":"Frank", "directorSurname":"Gallager", "companyName":"SBPT"}'
     -H "Content-Type: application/json"
-    -X POST http://localhost:8080/application
+    -X POST http://localhost:8888/application
 
     curl
     -d '{"type":"INDIVIDUAL", "name":"Frank", "surname":"Gallager", "phone":"+79990001122"}'
     -H "Content-Type: application/json"
-    -X POST http://localhost:8080/application
+    -X POST http://localhost:8888/application
     
     curl -i
     -H "Accept: application/json"
-    -H "Content-Type: application/json"
-    -X GET http://localhost:8080/application/1
+    -X GET http://localhost:8888/application/1
+    
+    curl -H -X GET http://192.168.99.100:8888/actuator/health //статус сервиса
  
