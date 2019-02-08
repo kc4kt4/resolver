@@ -21,6 +21,7 @@ HTTP адрес для приема заявок один для всех тип
 Основной стек технологий:
     
     Java 8
+    Docker
     Spring Boot 2
     Spring AMQP
     PostgreSQL 11
